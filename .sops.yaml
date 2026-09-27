@@ -1,0 +1,7 @@
+creation_rules:
+  - path_regex: '^(infrastructure|workloads)/.*\.sops\.ya?ml$'
+    encrypted_regex: '^(data|stringData)$'
+    age: >-
+      age12jhy43djgv0syqc600uym20jd3xp84vj8sucda03fz96dr08xpps7ftghy
+      age1t9hxk98xxze92rxjyq77q79gw7lf6jwa5pn83zqp037qq725z4lsxvqf8x
+    gpg: C4F8BFBD82E39F4C89669C443B3CC85CF5833E90

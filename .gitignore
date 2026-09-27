@@ -1,0 +1,11 @@
+.DS_Store
+.env
+.env.*
+*.agekey
+*.decrypted.yaml
+*.decrypted.yml
+*.bak
+
+# Local Flux and Kubernetes tooling
+.cache/
+.kube/
