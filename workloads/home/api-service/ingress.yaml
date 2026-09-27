@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-service
+  labels:
+    app.kubernetes.io/name: api-service
+    app.kubernetes.io/part-of: vgu-graduation
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - api.grad26.fuisloy.dev
+      secretName: api-service-tls
+  rules:
+    - host: api.grad26.fuisloy.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-service
+                port:
+                  name: http
