@@ -50,9 +50,9 @@ spec:
             - name: NODE_ENV
               value: production
             - name: PUBLIC_ORIGIN
-              value: http://localhost:3000
+              value: https://grad26.fuisloy.dev
             - name: COOKIE_DOMAIN
-              value: localhost
+              value: .grad26.fuisloy.dev
           readinessProbe:
             httpGet:
               path: /readyz
