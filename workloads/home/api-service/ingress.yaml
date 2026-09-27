@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/part-of: vgu-graduation
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.middlewares: grad-redirect-https@kubernetescrd,grad-rate-limit@kubernetescrd,grad-security-headers@kubernetescrd
 spec:
   ingressClassName: traefik
   tls:
@@ -18,6 +19,34 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-service
+                port:
+                  name: http
+---
+# Longer rule wins in Traefik, so /admin/* always hits deny-all first.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-service-admin
+  labels:
+    app.kubernetes.io/name: api-service
+    app.kubernetes.io/part-of: vgu-graduation
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: grad-redirect-https@kubernetescrd,grad-deny-all@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - api.grad26.fuisloy.dev
+      secretName: api-service-tls
+  rules:
+    - host: api.grad26.fuisloy.dev
+      http:
+        paths:
+          - path: /admin
             pathType: Prefix
             backend:
               service:

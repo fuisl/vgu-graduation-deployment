@@ -1,0 +1,25 @@
+# Overrides for the Traefik bundled with k3s (merged into its HelmChart values).
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    service:
+      spec:
+        # Keep the real client IP (single node, so no cross-node hop is lost);
+        # rate limits are per client IP.
+        externalTrafficPolicy: Local
+    logs:
+      access:
+        enabled: true
+        format: json
+        fields:
+          general:
+            defaultmode: keep
+            names:
+              # Paths can carry tokens; never log them.
+              RequestPath: drop
+          headers:
+            defaultmode: drop

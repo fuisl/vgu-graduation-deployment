@@ -4,3 +4,4 @@ resources:
   - namespaces.yaml
   - network-policies.yaml
   - cluster-issuers.yaml
+  - traefik-config.yaml
