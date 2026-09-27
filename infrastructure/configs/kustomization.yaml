@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - namespaces.yaml
   - network-policies.yaml
+  - cluster-issuers.yaml
