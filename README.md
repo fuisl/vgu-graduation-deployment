@@ -13,8 +13,10 @@ infrastructure/configs/        Namespaces and cluster policies
 workloads/home/                Home-cluster application overlay
 ```
 
-The repository currently deploys only the minimal PostgreSQL workload. API,
-worker, web, Garage, translation, and printer workloads are not enabled.
+The repository currently deploys PostgreSQL and the API workload. The API uses
+the `fuisl/grad26-api:latest` image and is exposed inside the `grad` namespace
+as the `api-service` ClusterIP Service on port 4000. Worker, web, Garage, translation,
+and printer workloads are not enabled.
 
 Application local-development and deployment boundaries are documented in
 [`docs/application-deployment.md`](docs/application-deployment.md). In short,
