@@ -1,0 +1,51 @@
+apiVersion: v1
+data:
+    SPACESHIP_API_KEY: ENC[AES256_GCM,data:0bgWIrZ7U0GuWVKLAJNlfxHFDV25U7GSgZjgLA==,iv:KzGBTS2M16G3d4UZYBDMNJaLCPqoee1kG7wdiEfVcp0=,tag:GCD9i/CspSn8U7bYo5krYg==,type:str]
+    SPACESHIP_API_SECRET: ENC[AES256_GCM,data:rGbXccZlCA0inV87o1LDZsd+20WXp8jfzXehBBWp6XPa/SoLk5IJ1IACrCIbmRrprcoO2D3I1kjJK2AqlkG+2WbEZ9IiHU9yOYlInNT3e+kYelomOVrz8g==,iv:KUuf1kvKRcbJn0hneq8W3G5n7HF23LaDHn1X8eMRu0U=,tag:XRb1+2uoI6T1lzQjyuWkYQ==,type:str]
+kind: Secret
+metadata:
+    name: spaceship-api
+    namespace: grad
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1dk5MK3pnUW01NVdIT3Yv
+            N29XSmF6M1NxSUVKN3pIZTUwMWFBcXpnK1Z3CjNwb25NZXVnenIyZnhFNHVaNCtS
+            emNCVksvenNxbU5SaTVnbEhyOXFSZUkKLS0tIHZEa2llWDIwQ082ZFMxaUNlODNV
+            S09tR21YWDJzN3BtUG5KZ2p2M1lqSWsKnVjfvpHvjg2RwlBSuJ4btFJQnmnIsZWl
+            Q53P7Gv4p7Gd6AjYHTI9756so3O2caaQIQdrlM6EniHghhITvJ7tIA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age12jhy43djgv0syqc600uym20jd3xp84vj8sucda03fz96dr08xpps7ftghy
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBXOXBic3N0aTlFMThjSHVx
+            b2FNd0hRazl3QjB6OS9qajZocEduQzFjbTNBCkMwVmhTaks3aVYybHFIMFBxRlIw
+            NFl6UElZTytzNHBEbXBKNDl1bmU3a3cKLS0tIFRTbTFhbEZ2ZEhPbldid1cwM1Vs
+            NWFqNnFPK3ZHdTlYL1lVQ3ZPa2hlY2MKGhhhSbB+QF7xjF+pTJT4x7I3lw8+6FBN
+            T2m7dpQJsmjmt0tcAHhHBA36tz0p8F3UER1Isph89mOihefOhUnsVw==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1t9hxk98xxze92rxjyq77q79gw7lf6jwa5pn83zqp037qq725z4lsxvqf8x
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-09-27T15:30:30Z"
+    mac: ENC[AES256_GCM,data:C4aEFLqy1+hbOFqQj7xqXj7ScYHRoXhjx+ILV60V10t1QC+iV1OOSMYX3+FFto4cm55nHjLWcCRofqFroaQ4/bPZg/cEX5anDgxeFmH273fNe7RKyIu2TQvIiTrhjTcThhPO8EAkG1ikXr7loiW4edELIEuQeTx2czcsyRS9lgo=,iv:AmjePl73LegkPw4jAI5ZOGnQWmyw4jaAhayJ0Nz86TQ=,tag:RLYHZnTG/YZI9UT3RMsarA==,type:str]
+    pgp:
+        - created_at: "2026-09-27T15:30:30Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQGMA13affh08wENAQwAtC3ybhlwPGdQdHq1eC/47nIavV3KItsAyLZhnKqk7sJw
+            f6Wz4+KixyzG3gg2EczrvzAi21G413wmM4N+E4gwowGbCVeUIrgJTu9gNVMCZQ+/
+            7hUOF4KZBR7gnNA5zGWjYpIrV/qNxMxEqhnWotGIETj+b4hpcstW7S3dek44Y8tX
+            bnfdsuyjuA8gZlu4pFndmIxEyHizhjjFdkrFz3Wwyl/u5PMss1lAsYIEPtahBq+p
+            1oJ/PPSiaeoel+RsE1iJ7iu5oa9YPQMPq1eZHYwnVGmd0owEZLbPCdLOKttKVDT9
+            YGDU3QD7spnZGiZIpP8FcX22ywhMDlK5XOs5Yxcs2SM1iZIs9HpSY1oAlRD4Qb5J
+            JETFjbzYo48gaKaAr+4KR0hxXVQz5KINQniD/J2CFVXk/4dfdWzkZRn7g5Po7Ipd
+            76saW4Wok1TaXK1Ka/DL0O1W4rsP2Njx+mo8RajXpcqYT9Cvj9hZC8hQ7q4taoZV
+            UUYJoO+quOlQdLfXGQM41GgBCQIQtBJSuFZUHaE0aj/9E1nDayoo1LVj1T7FL6dm
+            8GRmPdNbjb2gDAZtrLv4QUSBUWagdxSf1yEAZPZRQJLbWlF5VxazyV6f/YcdQHYt
+            7slVesY4Cgn9DqUbxZLp9VkWg7f8klEwFA==
+            =7znB
+            -----END PGP MESSAGE-----
+          fp: C4F8BFBD82E39F4C89669C443B3CC85CF5833E90
+    version: 3.13.3
