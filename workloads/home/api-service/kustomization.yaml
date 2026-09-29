@@ -6,3 +6,4 @@ resources:
   - deployment.yaml
   - middlewares.yaml
   - ingress.yaml
+  - api-secrets.sops.yaml

@@ -18,6 +18,37 @@ spec:
         app.kubernetes.io/component: server
         app.kubernetes.io/part-of: vgu-graduation
     spec:
+      # Applies pending database migrations before the API starts. Idempotent, and
+      # serialized by a Postgres advisory lock, so a rollout never races itself.
+      # It loads the same production config, so it needs the same secrets.
+      initContainers:
+        - name: migrate
+          image: fuisl/grad26-api:latest
+          imagePullPolicy: Always
+          command: ["node", "dist/migrate.js"]
+          envFrom:
+            - secretRef:
+                name: api-secrets
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: POSTGRES_DB
+            - name: DATABASE_URL
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+            - name: NODE_ENV
+              value: production
       containers:
         - name: api-service
           image: fuisl/grad26-api:latest
@@ -25,6 +56,10 @@ spec:
           ports:
             - name: http
               containerPort: 4000
+          # ADMIN_SESSION_SECRET, PASS_SIGNING_KEY, SERVICE_TOKEN_* and S3_* (SOPS-encrypted).
+          envFrom:
+            - secretRef:
+                name: api-secrets
           env:
             - name: POSTGRES_USER
               valueFrom:
