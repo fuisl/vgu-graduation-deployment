@@ -32,23 +32,12 @@ spec:
             - secretRef:
                 name: api-s3
           env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: POSTGRES_PASSWORD
-            - name: POSTGRES_DB
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: POSTGRES_DB
+            # Created by CloudNativePG for the grad-db Cluster's application role.
             - name: DATABASE_URL
-              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+              valueFrom:
+                secretKeyRef:
+                  name: grad-db-app
+                  key: uri
             - name: NODE_ENV
               value: production
       containers:
@@ -66,23 +55,12 @@ spec:
             - secretRef:
                 name: api-s3
           env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: POSTGRES_PASSWORD
-            - name: POSTGRES_DB
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: POSTGRES_DB
+            # Created by CloudNativePG for the grad-db Cluster's application role.
             - name: DATABASE_URL
-              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+              valueFrom:
+                secretKeyRef:
+                  name: grad-db-app
+                  key: uri
             - name: PORT
               value: "4000"
             - name: HOST

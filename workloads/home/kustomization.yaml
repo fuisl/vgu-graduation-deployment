@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - garage
   - backups
-  - postgres
   - grad-db
   - api-service
   - ddns
