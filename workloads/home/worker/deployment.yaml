@@ -1,0 +1,83 @@
+# Background job runner: the api image started with the worker entrypoint. It polls
+# the jobs table in Postgres (no broker) and talks to Garage; it serves no HTTP, so
+# there are no probes and no Service. Migrations are run by the api's init container.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  labels:
+    app.kubernetes.io/name: worker
+    app.kubernetes.io/component: worker
+    app.kubernetes.io/part-of: vgu-graduation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: worker
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: worker
+        app.kubernetes.io/component: worker
+        app.kubernetes.io/part-of: vgu-graduation
+    spec:
+      # The worker finishes its current job within 25s of SIGTERM, then exits.
+      terminationGracePeriodSeconds: 30
+      automountServiceAccountToken: false
+      securityContext:
+        # The image's `grad` user (apps/api/Dockerfile); numeric so runAsNonRoot can verify it.
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: worker
+          # Bumped by Flux image automation. imagePullPolicy stays Always while the tag is
+          # the mutable :latest; switch to IfNotPresent once a main-<ts>-<sha> tag lands.
+          image: fuisl/grad26-api:latest # {"$imagepolicy": "flux-system:grad26-api"}
+          imagePullPolicy: Always
+          command: ["node", "dist/worker.js"]
+          # Same production config as the api: api-secrets and the Garage S3_* credentials
+          # (api-s3), both SOPS-encrypted in workloads/home/api-service.
+          envFrom:
+            - secretRef:
+                name: api-secrets
+            - secretRef:
+                name: api-s3
+          env:
+            # Created by CloudNativePG for the grad-db Cluster's application role.
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: grad-db-app
+                  key: uri
+            - name: NODE_ENV
+              value: production
+            - name: PUBLIC_ORIGIN
+              value: https://grad26.fuisloy.dev
+            - name: COOKIE_DOMAIN
+              value: .grad26.fuisloy.dev
+            - name: S3_BUCKET_ORIGINALS
+              value: grad-originals
+            - name: S3_BUCKET_DERIVATIVES
+              value: grad-derivatives
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            # Scratch space for derivative generation; the root filesystem is read-only.
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 1Gi
