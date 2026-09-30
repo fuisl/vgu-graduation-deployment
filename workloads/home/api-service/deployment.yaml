@@ -24,11 +24,24 @@ spec:
       # Image tags are bumped by Flux image automation (clusters/home/image-automation.yaml)
       # through the "$imagepolicy" setter markers. main-<ts>-<sha> tags are immutable,
       # so IfNotPresent: a restart reuses the cached image instead of pulling.
+      automountServiceAccountToken: false
+      securityContext:
+        # The image's `grad` user (apps/api/Dockerfile); numeric so runAsNonRoot can verify it.
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
       initContainers:
         - name: migrate
           image: docker.io/fuisl/grad26-api:main-20260930142908-88b2e05 # {"$imagepolicy": "flux-system:grad26-api"}
           imagePullPolicy: IfNotPresent
           command: ["node", "dist/migrate.js"]
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
           envFrom:
             - secretRef:
                 name: api-secrets
@@ -90,9 +103,22 @@ spec:
               port: http
             initialDelaySeconds: 15
             periodSeconds: 20
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            # Scratch space (e.g. multipart upload spill); the root filesystem is read-only.
+            - name: tmp
+              mountPath: /tmp
           resources:
             requests:
               cpu: 100m
               memory: 128Mi
             limits:
               memory: 256Mi
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 1Gi
