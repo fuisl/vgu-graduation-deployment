@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/part-of: vgu-graduation
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.middlewares: grad-redirect-https@kubernetescrd,grad-rate-limit@kubernetescrd,grad-security-headers@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: grad-redirect-https@kubernetescrd,grad-rate-limit@kubernetescrd,grad-security-headers@kubernetescrd,edge-fallback@kubernetescrd
 spec:
   ingressClassName: traefik
   tls:

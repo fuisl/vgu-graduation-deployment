@@ -6,3 +6,4 @@ resources:
   - grad-db
   - api-service
   - ddns
+  - fallback

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<title>GRAD '26 · Temporarily unavailable</title>
+<!-- Static fallback served by Traefik's errors middleware (fuisl/vgu-graduation#53).
+     No scripts, fonts or images from elsewhere: it must render when nothing else does.
+     Colours, type and spacing are inlined from packages/design-tokens (tokens.css). -->
+<style>
+:root{color-scheme:light;--bg:#fafafa;--fg:#111;--muted:#686868;--border:#dedede;--font-sans:Arial,Helvetica,sans-serif;--font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;--gutter:clamp(1rem,4vw,3rem)}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#0a0a0a;--fg:#ededed;--muted:#929292;--border:#292929}}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--fg)}
+body{margin:0;font-family:var(--font-sans);line-height:1.5}
+main{min-height:100svh;max-width:760px;margin:0 auto;padding:2rem var(--gutter);display:grid;gap:2rem;align-content:start}
+h1{margin:0;font-size:1.75rem;line-height:1.2}
+h2,.mono{font-family:var(--font-mono);letter-spacing:.04em;text-transform:uppercase;font-size:.75rem;font-weight:400;color:var(--muted);margin:0 0 .25rem}
+p{margin:0}
+.status{padding:.75rem 1rem;border:1px solid var(--border);border-radius:4px}
+.note{font-size:.75rem;color:var(--muted);margin-top:.5rem}
+a{color:inherit;text-underline-offset:.2em}
+a:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<header>
+<p class="mono">GRAD '26</p>
+<h1>GRAD '26 Graduation Ceremony</h1>
+</header>
+<p class="status" role="status">This site is temporarily unavailable. The ceremony details below still stand; please try again in a few minutes.</p>
+<section aria-labelledby="when">
+<h2 id="when">When</h2>
+<!-- TODO(fuisl/vgu-graduation#83): exact date and start time are not confirmed yet.
+     Replace with the confirmed values, e.g. "Saturday, 14 November 2026" / "09:00 (Asia/Ho_Chi_Minh)". -->
+<p>November 2026</p>
+<p class="note">The exact date and time are still to be confirmed.</p>
+</section>
+<section aria-labelledby="where">
+<h2 id="where">Where</h2>
+<!-- TODO(fuisl/vgu-graduation#83): street address not confirmed yet; replace "VGU Campus, HCMC". -->
+<p>Ceremony Hall<br>Vietnamese-German University<br>VGU Campus, HCMC</p>
+<p><a href="https://maps.app.goo.gl/meCAgQyakBbWh8LDA" rel="noopener noreferrer">Directions (opens Google Maps)</a></p>
+</section>
+<!-- Fallback QR codes (fuisl/vgu-graduation#24): add them here as inline SVG
+     (no external images), each with a visible caption and alt text, e.g.
+<section aria-labelledby="qr">
+<h2 id="qr">Scan</h2>
+<figure><svg role="img" aria-label="..." viewBox="...">...</svg><figcaption>...</figcaption></figure>
+</section>
+-->
+</main>
+</body>
+</html>

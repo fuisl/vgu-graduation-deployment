@@ -11,3 +11,12 @@ metadata:
   name: garage
   labels:
     app.kubernetes.io/part-of: vgu-graduation
+---
+# Ingress-facing helpers (the static fallback page).
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: edge
+  labels:
+    app.kubernetes.io/part-of: vgu-graduation
+    pod-security.kubernetes.io/enforce: restricted
