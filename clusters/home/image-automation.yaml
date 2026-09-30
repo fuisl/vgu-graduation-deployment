@@ -1,0 +1,61 @@
+# Flux image automation for the api image (also used by the worker).
+# docker.io/fuisl/grad26-api is public, so no secretRef is needed to read it.
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: grad26-api
+  namespace: flux-system
+spec:
+  image: docker.io/fuisl/grad26-api
+  interval: 5m
+---
+# CI tags every push to main as main-<YYYYMMDDHHmmss UTC>-<sha7>; the timestamp
+# orders builds, the sha links a tag back to its commit. `latest` and
+# `sha-<short>` are ignored because they can't be ordered.
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: grad26-api
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: grad26-api
+  filterTags:
+    pattern: '^main-(?P<ts>[0-9]{14})-[a-f0-9]{7}$'
+    extract: '$ts'
+  policy:
+    numerical:
+      order: asc
+---
+# Checks out main, rewrites the "$imagepolicy" setter markers under
+# ./workloads/home and pushes to flux/image-updates, so every bump lands on main
+# through a reviewed pull request rather than directly.
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageUpdateAutomation
+metadata:
+  name: grad
+  namespace: flux-system
+spec:
+  interval: 10m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
+      messageTemplate: |
+        chore(deploy): bump images
+
+        {{ range .Changed.Changes -}}
+        - {{ .OldValue }} -> {{ .NewValue }}
+        {{ end -}}
+    push:
+      branch: flux/image-updates
+  update:
+    path: ./workloads/home
+    strategy: Setters

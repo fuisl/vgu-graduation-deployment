@@ -21,9 +21,13 @@ spec:
       # Applies pending database migrations before the API starts. Idempotent, and
       # serialized by a Postgres advisory lock, so a rollout never races itself.
       # It loads the same production config, so it needs the same secrets.
+      # Image tags are bumped by Flux image automation (clusters/home/image-automation.yaml)
+      # through the "$imagepolicy" setter markers. imagePullPolicy stays Always while the
+      # tag is the mutable :latest; switch to IfNotPresent once the first main-<ts>-<sha>
+      # bump has merged and the tag is immutable.
       initContainers:
         - name: migrate
-          image: fuisl/grad26-api:latest
+          image: fuisl/grad26-api:latest # {"$imagepolicy": "flux-system:grad26-api"}
           imagePullPolicy: Always
           command: ["node", "dist/migrate.js"]
           envFrom:
@@ -42,7 +46,7 @@ spec:
               value: production
       containers:
         - name: api-service
-          image: fuisl/grad26-api:latest
+          image: fuisl/grad26-api:latest # {"$imagepolicy": "flux-system:grad26-api"}
           imagePullPolicy: Always
           ports:
             - name: http

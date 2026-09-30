@@ -13,10 +13,11 @@ infrastructure/configs/        Namespaces and cluster policies
 workloads/home/                Home-cluster application overlay
 ```
 
-The repository currently deploys PostgreSQL and the API workload. The API uses
-the `fuisl/grad26-api:latest` image and is exposed inside the `grad` namespace
-as the `api-service` ClusterIP Service on port 4000. Worker, web, Garage, translation,
-and printer workloads are not enabled.
+The repository currently deploys PostgreSQL, Garage, the API and the worker. The
+API is exposed inside the `grad` namespace as the `api-service` ClusterIP Service
+on port 4000; the worker is the same `fuisl/grad26-api` image started with
+`node dist/worker.js` and serves nothing. Web, translation and printer workloads
+are not enabled.
 
 Application local-development and deployment boundaries are documented in
 [`docs/application-deployment.md`](docs/application-deployment.md). In short,
@@ -35,10 +36,20 @@ flux bootstrap github \
   --repository=vgu-graduation-deployment \
   --branch=main \
   --path=clusters/home \
-  --personal
+  --personal \
+  --components-extra=image-reflector-controller,image-automation-controller
 ```
 
 Flux will add `clusters/home/flux-system/`. Do not create that directory manually.
+
+## Image automation
+
+`clusters/home/image-automation.yaml` watches `docker.io/fuisl/grad26-api` and
+selects the newest `main-<YYYYMMDDHHmmss>-<sha7>` tag that CI publishes for each
+push to main. Manifests under `workloads/home` mark the image lines to update with
+`# {"$imagepolicy": "flux-system:grad26-api"}`. The automation checks out `main`
+and pushes bumps to the `flux/image-updates` branch; open a pull request from that
+branch to roll them out. Flux's Git credentials need write access for the push.
 
 ## SOPS
 

@@ -4,3 +4,4 @@ resources:
   - flux-system
   - infrastructure.yaml
   - workloads.yaml
+  - image-automation.yaml
