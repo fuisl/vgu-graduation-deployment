@@ -4,3 +4,10 @@ metadata:
   name: grad
   labels:
     app.kubernetes.io/part-of: vgu-graduation
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: garage
+  labels:
+    app.kubernetes.io/part-of: vgu-graduation

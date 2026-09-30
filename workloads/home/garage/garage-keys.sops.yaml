@@ -1,0 +1,35 @@
+# Read only by scripts/garage-bootstrap.sh, which imports these keys into Garage.
+apiVersion: v1
+kind: Secret
+metadata:
+    name: garage-keys
+type: Opaque
+stringData:
+    API_ACCESS_KEY_ID: ENC[AES256_GCM,data:75127rdTnhg3MbYBZ0KHQkinm4q4HmGahHk=,iv:45wRL7K1l8x30R9p5QjKV3qvY9G0VW2/0jojRMJpPpU=,tag:g5/wQqmwI79dKzoSF5XFTg==,type:str]
+    API_SECRET_KEY: ENC[AES256_GCM,data:o9rSg+ZyYR3E1k/WWHmq0hM/v0wn1qrrLcSUwLshbTw9T/mRE/VtlIioqv4ePfphkzus9KTZ1S8XUoxt8GL1DQ==,iv:ayo1vgEsk54F24KadtCBZC6WDIKleBpRZZdIc4x8mD8=,tag:PtPkvx1z6Alu8iTZbcklUQ==,type:str]
+    BACKUP_ACCESS_KEY_ID: ENC[AES256_GCM,data:pO0pPl+R4ToMj+VhSKoqfBwJVL0zE8Kz5Mw=,iv:YMaAwyDaoubJ5KsxRGXtLv99nB4SWEfWZ23tcGSXZLE=,tag:Z8qHDOAp3OXkh6tURQquag==,type:str]
+    BACKUP_SECRET_KEY: ENC[AES256_GCM,data:W2tjWmBlXJXkwIwKZi2g1xm1sopuX1Jsle3dR/uuDF4ALqV+MdMJgfTSWDd2jvOAAG3keTS7xmW7gTzMyOvZTA==,iv:pLrKBYyNWjsvazNZDWC1inPWTikDNPvAydBkW55215Y=,tag:YJNWcehkk7JOX77rih1D/w==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBON2xWZXd6UzRBZDhtNi8v
+            a2RDZzk4YThCd2taeGZvRlhGQ2t0U0dOR1IwClVIYkFERDJ1d0ZIa1J0a3I1Wnpj
+            Q1Z2ZWZSUUxtdTYrZ0lIN01hblJCQ3cKLS0tIEUwRWlWZ0NWZFBnK2daZ3IvQkdy
+            cXpaWXZ1SjBldHRNRmxLMjRtUVlEWEEKaTEPRSf4ewIrMXMGs0XdByqdsTnEDbET
+            Xta4SCQnH57PRC/K3+J7mc9ylcLvqijsGfzAk9ljyU1DDQH48+05OA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age12jhy43djgv0syqc600uym20jd3xp84vj8sucda03fz96dr08xpps7ftghy
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjYUpyQ05WdkY1bG9lelJK
+            Q2IxY2kvZzIrWjNCRFBrd0t6MlYxM0xydGpVCnB2ZUV1aE01QTQyemorWTZRZHV0
+            c1Q1NWRvV0h6TjhGaDRLYmQzVTFsVHMKLS0tIEJoaWJUdS9zRDVCT3JIRDE1ZVRI
+            MElFOGQycFFLVkhjeW5WeWlPaEtsbWsKWu6770+nuvIa9PnxZyFFJoGLQN8iLpMc
+            fxLttZab6SZE002lOmm0TKfFV9CBKG6fEnk3clBg6Gs7w6uxe2JqNA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1t9hxk98xxze92rxjyq77q79gw7lf6jwa5pn83zqp037qq725z4lsxvqf8x
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-09-30T13:31:33Z"
+    mac: ENC[AES256_GCM,data:rejZ22e7tfL0AdgaTU7blu34GL9ZaNX5CeEN3Zx9mgnxY874SY7z3xIgRKcfp/rqA1+x7ZNx7nm0wVBUtvKU1/+6xIiTCpMQ+sWx5DIb/2AzFzUbyzFcKMwxNTOlK43figiASsNdaoCZw46tJa4s0nGeEDWdZOLP6aoFdOYbG6E=,iv:R+y6i4HquEygLk/HpYzpIEbLs2NPeLcpnnhexuwybUY=,tag:5AGh9rSLzye0O7i+jlOCCg==,type:str]
+    version: 3.13.3

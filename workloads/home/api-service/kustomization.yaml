@@ -7,3 +7,4 @@ resources:
   - middlewares.yaml
   - ingress.yaml
   - api-secrets.sops.yaml
+  - api-s3.sops.yaml
