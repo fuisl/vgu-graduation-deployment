@@ -31,13 +31,3 @@ spec:
     average: 10
     period: 1s
     burst: 30
----
-# /admin/* has no authentication in the API yet; refuse it until it does.
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: deny-all
-spec:
-  ipAllowList:
-    sourceRange:
-      - 127.0.0.1/32
