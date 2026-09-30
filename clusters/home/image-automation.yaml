@@ -27,16 +27,17 @@ spec:
     numerical:
       order: asc
 ---
-# Checks out main, rewrites the "$imagepolicy" setter markers under
-# ./workloads/home and pushes to flux/image-updates, so every bump lands on main
-# through a reviewed pull request rather than directly.
+# Checks out main, rewrites the "$imagepolicy" setter markers under ./workloads/home
+# and pushes the bump straight back to main, so each new CI build deploys on its own
+# (auto-deploy). To freeze deploys (e.g. the week of the ceremony), set push.branch
+# to flux/image-updates: bumps then wait there for a reviewed pull request.
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageUpdateAutomation
 metadata:
   name: grad
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -55,7 +56,7 @@ spec:
         - {{ .OldValue }} -> {{ .NewValue }}
         {{ end -}}
     push:
-      branch: flux/image-updates
+      branch: main
   update:
     path: ./workloads/home
     strategy: Setters

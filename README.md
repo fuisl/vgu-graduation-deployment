@@ -48,8 +48,10 @@ Flux will add `clusters/home/flux-system/`. Do not create that directory manuall
 selects the newest `main-<YYYYMMDDHHmmss>-<sha7>` tag that CI publishes for each
 push to main. Manifests under `workloads/home` mark the image lines to update with
 `# {"$imagepolicy": "flux-system:grad26-api"}`. The automation checks out `main`
-and pushes bumps to the `flux/image-updates` branch; open a pull request from that
-branch to roll them out. Flux's Git credentials need write access for the push.
+and commits bumps straight back to `main`, so every CI build deploys on its own within
+about 10 minutes, as a pinned tag you can `git revert`. To freeze deploys, set
+`push.branch` to `flux/image-updates` and roll bumps out through reviewed pull
+requests. Flux's Git credentials need write access for the push.
 
 ## SOPS
 
