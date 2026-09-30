@@ -1,10 +1,9 @@
 # Application database (#50), managed by CloudNativePG. The operator creates the
 # Secret grad-db-app (key `uri`) that the api reads as DATABASE_URL.
 #
-# First start imports the existing `grad26` database from the old postgres
-# StatefulSet (pg_dump/pg_restore, Postgres 16 -> 17). The import runs only at
-# bootstrap; once the api has moved over, the old StatefulSet and the
-# externalClusters entry are removed.
+# Bootstrapped on 2026-09-30 by importing `grad26` from the old postgres
+# StatefulSet (pg_dump/pg_restore, Postgres 16 -> 17); bootstrap settings only
+# apply at creation, so the import source has since been removed.
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -24,19 +23,3 @@ spec:
     initdb:
       database: grad
       owner: grad
-      import:
-        type: microservice
-        databases:
-          - grad26
-        source:
-          externalCluster: legacy-postgres
-  externalClusters:
-    - name: legacy-postgres
-      connectionParameters:
-        host: postgres
-        user: grad
-        dbname: grad26
-        sslmode: disable
-      password:
-        name: postgres-credentials
-        key: POSTGRES_PASSWORD
