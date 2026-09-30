@@ -34,7 +34,7 @@ spec:
       containers:
         - name: worker
           # Bumped by Flux image automation; main-<ts>-<sha> tags are immutable.
-          image: docker.io/fuisl/grad26-api:main-20260930154307-b7f6294 # {"$imagepolicy": "flux-system:grad26-api"}
+          image: docker.io/fuisl/grad26-api:main-20260930154629-11b499e # {"$imagepolicy": "flux-system:grad26-api"}
           imagePullPolicy: IfNotPresent
           command: ["node", "dist/worker.js"]
           # Same production config as the api: api-secrets and the Garage S3_* credentials
