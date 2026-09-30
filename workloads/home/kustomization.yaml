@@ -7,3 +7,4 @@ resources:
   - api-service
   - worker
   - ddns
+  - fallback

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fallback
+  labels:
+    app.kubernetes.io/name: fallback
+    app.kubernetes.io/part-of: vgu-graduation
+spec:
+  selector:
+    app.kubernetes.io/name: fallback
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

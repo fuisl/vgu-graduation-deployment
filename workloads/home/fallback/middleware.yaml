@@ -1,0 +1,16 @@
+# Serves the static page when the api answers 502-504. With api-service scaled
+# to 0, Traefik (allowEmptyServices=true in k3s) answers 503, so that is caught
+# too. The Middleware lives here, next to the Service, because k3s' Traefik
+# runs without allowCrossNamespace; Ingresses in other namespaces reference it
+# as edge-fallback@kubernetescrd (Ingress annotations may name any namespace).
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: fallback
+spec:
+  errors:
+    status: ["502-504"]
+    service:
+      name: fallback
+      port: 80
+    query: /
