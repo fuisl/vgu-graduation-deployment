@@ -18,8 +18,9 @@ spec:
     contentTypeNosniff: true
     referrerPolicy: no-referrer
     customResponseHeaders:
-      # API responses are per-guest; no shared cache may store them.
-      Cache-Control: no-store
+      # Cache-Control is the API's job: it defaults to no-store and marks only
+      # shareable responses (derivatives, gallery, wishes, event info) cacheable.
+      # Forcing it here overwrote those (fuisl/vgu-graduation#137).
       X-Powered-By: ""
 ---
 apiVersion: traefik.io/v1alpha1
