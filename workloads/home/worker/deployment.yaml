@@ -35,7 +35,7 @@ spec:
         - name: worker
           # Bumped by Flux image automation. imagePullPolicy stays Always while the tag is
           # the mutable :latest; switch to IfNotPresent once a main-<ts>-<sha> tag lands.
-          image: fuisl/grad26-api:latest # {"$imagepolicy": "flux-system:grad26-api"}
+          image: docker.io/fuisl/grad26-api:main-20260930141128-42ab669 # {"$imagepolicy": "flux-system:grad26-api"}
           imagePullPolicy: Always
           command: ["node", "dist/worker.js"]
           # Same production config as the api: api-secrets and the Garage S3_* credentials
