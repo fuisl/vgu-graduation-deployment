@@ -10,7 +10,8 @@ spec:
   chart:
     spec:
       chart: ./charts/garage
-      reconcileStrategy: Revision
+      # Upgrade only when Chart.yaml's version changes, not on every commit to the repo.
+      reconcileStrategy: ChartVersion
       sourceRef:
         kind: GitRepository
         name: flux-system
