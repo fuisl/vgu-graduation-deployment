@@ -26,7 +26,7 @@ spec:
       # so IfNotPresent: a restart reuses the cached image instead of pulling.
       initContainers:
         - name: migrate
-          image: docker.io/fuisl/grad26-api:main-20260930141128-42ab669 # {"$imagepolicy": "flux-system:grad26-api"}
+          image: docker.io/fuisl/grad26-api:main-20260930142908-88b2e05 # {"$imagepolicy": "flux-system:grad26-api"}
           imagePullPolicy: IfNotPresent
           command: ["node", "dist/migrate.js"]
           envFrom:
@@ -45,7 +45,7 @@ spec:
               value: production
       containers:
         - name: api-service
-          image: docker.io/fuisl/grad26-api:main-20260930141128-42ab669 # {"$imagepolicy": "flux-system:grad26-api"}
+          image: docker.io/fuisl/grad26-api:main-20260930142908-88b2e05 # {"$imagepolicy": "flux-system:grad26-api"}
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
