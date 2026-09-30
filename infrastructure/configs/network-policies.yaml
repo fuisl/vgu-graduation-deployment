@@ -167,3 +167,132 @@ spec:
       ports:
         - protocol: TCP
           port: 3900
+---
+# CloudNativePG instance pods (and their bootstrap jobs) talk to the Kubernetes
+# API. k3s DNATs the kubernetes Service to the node's 6443; the node IP comes
+# from DHCP, so match the port rather than the address.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-grad-db-apiserver
+  namespace: grad
+spec:
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: grad-db
+  policyTypes:
+    - Egress
+  egress:
+    - ports:
+        - protocol: TCP
+          port: 6443
+    - to:
+        - ipBlock:
+            cidr: 10.43.0.1/32
+      ports:
+        - protocol: TCP
+          port: 443
+---
+# The operator polls each instance's status endpoint and connects to Postgres.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-grad-db-from-operator
+  namespace: grad
+spec:
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: grad-db
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: cnpg-system
+      ports:
+        - protocol: TCP
+          port: 8000
+        - protocol: TCP
+          port: 5432
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-grad-db-from-api
+  namespace: grad
+spec:
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: grad-db
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: api-service
+      ports:
+        - protocol: TCP
+          port: 5432
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-grad-db
+  namespace: grad
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: api-service
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              cnpg.io/cluster: grad-db
+      ports:
+        - protocol: TCP
+          port: 5432
+---
+# One-time import from the legacy postgres StatefulSet; removed with it.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-grad-db-import-egress
+  namespace: grad
+spec:
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: grad-db
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: postgres
+      ports:
+        - protocol: TCP
+          port: 5432
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-postgres-from-grad-db-import
+  namespace: grad
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: postgres
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              cnpg.io/cluster: grad-db
+      ports:
+        - protocol: TCP
+          port: 5432
