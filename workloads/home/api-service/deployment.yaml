@@ -29,6 +29,8 @@ spec:
           envFrom:
             - secretRef:
                 name: api-secrets
+            - secretRef:
+                name: api-s3
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -56,10 +58,13 @@ spec:
           ports:
             - name: http
               containerPort: 4000
-          # ADMIN_SESSION_SECRET, PASS_SIGNING_KEY, SERVICE_TOKEN_* and S3_* (SOPS-encrypted).
+          # ADMIN_SESSION_SECRET, PASS_SIGNING_KEY, SERVICE_TOKEN_* (api-secrets) and the
+          # Garage S3_* endpoint and credentials (api-s3), both SOPS-encrypted.
           envFrom:
             - secretRef:
                 name: api-secrets
+            - secretRef:
+                name: api-s3
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -88,6 +93,10 @@ spec:
               value: https://grad26.fuisloy.dev
             - name: COOKIE_DOMAIN
               value: .grad26.fuisloy.dev
+            - name: S3_BUCKET_ORIGINALS
+              value: grad-originals
+            - name: S3_BUCKET_DERIVATIVES
+              value: grad-derivatives
           readinessProbe:
             httpGet:
               path: /readyz

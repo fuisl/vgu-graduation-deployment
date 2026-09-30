@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: garage-rpc
+type: Opaque
+stringData:
+    rpcSecret: ENC[AES256_GCM,data:BPhCAGUfe9KpKjxDV/8IYJXKStzgzacmsILQlmTshLjjIL0+RY5hHz1Gtfsu/QqcXEYtrlVt4o6R0IQ9KRy1Xg==,iv:DM7lvvgO7ZSVB00wRcBGpLJ4Qe2488gq5Tq6qnPy5u4=,tag:B/F6Le9/1c/gG6Cm5wxIHA==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB4c2dDeEZGektWb2JHWW5j
+            OThtNFFGTHNxeU40N3VKNVJYNVkzMFdnQ0JVCnBKMGdtUnNRb3BNSmU1RFhLRm1L
+            OHhCQ1VuYTd0WEdmS2V1ZlN3clcrUlUKLS0tIFczVXIxdWN4cmFERjdaYXAxVDZB
+            UlpHUGZkbmNlQUd6Y0Zuck9YZkhSekEKBn+qEURdRH/gBwYPBCkCJULtgsjMBCdT
+            404Z+oNHMDBEUVMtB8R9UEH72HCjkGJyoXvYyg5IGI2LKKogBKbw5Q==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age12jhy43djgv0syqc600uym20jd3xp84vj8sucda03fz96dr08xpps7ftghy
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArU1lQdnBjMEVZY3cwYjFS
+            TDZ3OUpyVkZlQWgrRm5zdEUvNXBXUHJkWlJjCnNxaEgvM3JpNVY0U0VZamNYbnU1
+            OGlUSlFSRGQxa201cmRaTFhaYnBXTTAKLS0tIEs3bzgybyt1elhkRVVLVklFemUz
+            REJqNW1taTVmM0lTZVlRMHF3RVBkVEkK1/yWs9xL/3KudBzy5cAlx1WRg5aI+Pqc
+            iXSZlhOv+cp48E/n0hPDuj63XwbslwTczA+tKTvK+RI/mOP9WqsnCg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1t9hxk98xxze92rxjyq77q79gw7lf6jwa5pn83zqp037qq725z4lsxvqf8x
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-09-30T13:31:33Z"
+    mac: ENC[AES256_GCM,data:6xooEhrPEyD7TOlmJ3gG8gLmwN99h8BItNNKhHAyosIE5KM0rfHF85p/Ja+eLrw8sqZ5rODVHKqM1Mm94LEkoVKtA6tPkzwXThWbW7+9CX4UiXEGUcPULLj7c1s1ubjJoH4v96rmmOeaBkfUHgCwW0Rz7/U4/y2zzZRPlrTEips=,iv:MTzkk7MxPKOZu3I6XCz+YRZGtLC+WQ2olnFCZNouGis=,tag:Ghz9BaxWnPuDIYg3tmRbRA==,type:str]
+    version: 3.13.3
