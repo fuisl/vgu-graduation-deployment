@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: api-mail
+type: Opaque
+stringData:
+    SMTP_USER: ENC[AES256_GCM,data:esj0KH9J1L3YtZz26Toql1Hv,iv:8kflog99bshJ3LsXMaagX2/qTixnd7MYeHfeRDf4USk=,tag://YcThb3AA7N6wjANjs22g==,type:str]
+    SMTP_PASSWORD: ENC[AES256_GCM,data:DdwEwrmC2JvBXHxAc3vXkg==,iv:64qVHN3fDPRSLZ/e5Bmvfi+kh1Y0ZXZF2So02DofT8M=,tag:EBDlB1lTrdQ8NMhHWcwNhw==,type:str]
+    MAIL_FROM: ENC[AES256_GCM,data:dBxIFVMdpGWHc3elt5Zpdj7w/UkPE8kbZyiHcg9wk8dwyiu9,iv:cPD7ql54Hk7kzeqoYwUg5dNPyQDVjTrAkG8orKoJ0wM=,tag:lxtqj6iOnGGANo4y92bIVw==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBxUnNGNnF2cEpDOC82NEF4
+            b1JmUXRvMnhub0tENlN3bE9aWFJWRUN0RkI0CmV2RDlVZ1FXdjZPVmNOUG8vK1E2
+            TUZTb0lTc2NEaHNSMlNLQ3grQkloRGsKLS0tIG0xZEkvRDZDRk5hY0VMbUx6UGJq
+            cXBQQzNMUmZ1T3hMVE1pcG53TUtmd1kKRmJ1x2qGwZxQBzaGGU40VSGTu9DPSDpp
+            ItF/MpWT224yJo/rLw9XUp+0lvrDtyFUwjz2nXL4+eK18X1qWmLiiA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age12jhy43djgv0syqc600uym20jd3xp84vj8sucda03fz96dr08xpps7ftghy
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSd2Z3R0h0Ynh2Yy8rdVd4
+            bWhkVGMvY2QrYWtwRWdIU1lRTlQydUN1cVZVCjV2NWlSdVZnMmRFeGdESHBvT0ZF
+            RGNwdHNDNWowTVdNbjFhM2hPd2pKaW8KLS0tIFZBK1ZRU0cwanVtNWM1eTlwWVFY
+            d1ZDTzRVdTlhMzdWdXZqL1Z0U0p5ZzgKKKjycVDhb9bUxaeuFY/1IwCAlc20nSTO
+            niYM8WHivasS+Ub1pejs3BqqEjMpmoXljd21nTNoY2ndhmOXropSWA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1t9hxk98xxze92rxjyq77q79gw7lf6jwa5pn83zqp037qq725z4lsxvqf8x
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-10-19T09:22:50Z"
+    mac: ENC[AES256_GCM,data:6D4gSLdHsjbylZzP6ql/1/fmkwNAV7cJReVjY7gLEga/FDSDYLsFzjE/2Fem8zVRT3dr+jMUuw8xBOE7SdIsmGF1Cy07dCU4obgjARjXEVwIuCJ7J5xoq+OiBqJv5wSBJIvVFoAYje13pb/ME2yvtKqZcnQo3IFadKZD6h7k//o=,iv:sN2F3B/c7rRl/JYAwf1yYvzjx9LWle0rAbB1Szqt3XA=,tag:Zk3/fWNVz+2hTWFgP10x6Q==,type:str]
+    version: 3.13.3

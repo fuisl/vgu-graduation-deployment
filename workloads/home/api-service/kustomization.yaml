@@ -6,5 +6,7 @@ resources:
   - deployment.yaml
   - middlewares.yaml
   - ingress.yaml
+  - mail-egress.yaml
   - api-secrets.sops.yaml
   - api-s3.sops.yaml
+  - api-mail.sops.yaml
