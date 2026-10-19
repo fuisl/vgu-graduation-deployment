@@ -62,6 +62,10 @@ spec:
             # The API's public origin: the webcal:// feed link in calendar emails (ADR-012).
             - name: API_ORIGIN
               value: https://api.grad26.fuisloy.dev
+            # Calendar RSVP by email (vgu-graduation ADR-013): the api sends invitations as
+            # calendar invitations and the worker reads Yes/No replies over IMAP.
+            - name: MAIL_CALENDAR_RSVP
+              value: "true"
             - name: COOKIE_DOMAIN
               value: .grad26.fuisloy.dev
             - name: S3_BUCKET_ORIGINALS
