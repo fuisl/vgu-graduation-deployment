@@ -44,6 +44,10 @@ spec:
                 name: api-secrets
             - secretRef:
                 name: api-s3
+            # Guest email (ADR-012): the worker sends RSVP confirmations. Optional, like the api's.
+            - secretRef:
+                name: api-mail
+                optional: true
           env:
             # Created by CloudNativePG for the grad-db Cluster's application role.
             - name: DATABASE_URL
@@ -55,6 +59,9 @@ spec:
               value: production
             - name: PUBLIC_ORIGIN
               value: https://grad26.fuisloy.dev
+            # The API's public origin: the webcal:// feed link in calendar emails (ADR-012).
+            - name: API_ORIGIN
+              value: https://api.grad26.fuisloy.dev
             - name: COOKIE_DOMAIN
               value: .grad26.fuisloy.dev
             - name: S3_BUCKET_ORIGINALS
