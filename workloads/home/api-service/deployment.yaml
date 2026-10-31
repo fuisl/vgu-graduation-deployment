@@ -34,7 +34,7 @@ spec:
           type: RuntimeDefault
       initContainers:
         - name: migrate
-          image: docker.io/fuisl/grad26-api:main-20261030085726-f0b8e1c # {"$imagepolicy": "flux-system:grad26-api"}
+          image: docker.io/fuisl/grad26-api:main-20261031030302-99cac8a # {"$imagepolicy": "flux-system:grad26-api"}
           imagePullPolicy: IfNotPresent
           command: ["node", "dist/migrate.js"]
           securityContext:
@@ -58,7 +58,7 @@ spec:
               value: production
       containers:
         - name: api-service
-          image: docker.io/fuisl/grad26-api:main-20261030085726-f0b8e1c # {"$imagepolicy": "flux-system:grad26-api"}
+          image: docker.io/fuisl/grad26-api:main-20261031030302-99cac8a # {"$imagepolicy": "flux-system:grad26-api"}
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
